@@ -83,25 +83,25 @@
       <div class="column">
         <!-- <img src="/img/plover/01-fit.png" /> -->
         {{'```python
-        from plover.source import ImmutableSqlSource
-        from plover.store import AwsS3Store
-        from plover.backend import AwsBackend
-        from plover.engine import DatabaseEngine
+from plover.source import ImmutableSqlSource
+from plover.store import AwsS3Store
+from plover.backend import AwsBackend
+from plover.engine import DatabaseEngine
 
-        conn = connect_to_sql_database()
+conn = connect_to_sql_database()
 
-        db_engine = (
-        DatabaseEngine(
-        source=ImmutableSqlSource(conn, "SATELLITES_WH"),
-        store=AwsS3Store("myorg-plover", "SATELLITES_WH"),
-        backend=AwsBackend("myorg-plover"),
-        )
-        .fit()
-        .persist()
-        .metalearn()
-        .persist()
-        )
-        ```' | markdown(inline=true) | safe}}
+db_engine = (
+  DatabaseEngine(
+    source=ImmutableSqlSource(conn, "SATELLITES_WH"),
+    store=AwsS3Store("myorg-plover", "SATELLITES_WH"),
+    backend=AwsBackend("myorg-plover"),
+  )
+  .fit()
+  .persist()
+  .metalearn()
+  .persist()
+)
+```' | markdown(inline=true) | safe}}
       </div>
       <div class="column">
         <div>
@@ -123,14 +123,14 @@
     <div class="two-thirds">
       <div class="column">
         {{ "```python
-        top_5_errors = (
-        db_engine
-        .metrics
-        .errorness
-        .sort(by=['Confusion'], descending=True)
-        .head(5)
-        )
-        ```" | markdown(inline=true) | safe}}
+top_5_errors = (
+  db_engine
+    .metrics
+    .errorness
+    .sort(by=['Confusion'], descending=True)
+    .head(5)
+)
+```" | markdown(inline=true) | safe}}
         <!-- <img src="/img/plover/02-id.png" /> -->
         <div>
           <table border="1" class="dataframe">
@@ -205,11 +205,11 @@
       <div class="column">
         <div>
           {{ '```python
-          errs_like = db_engine.errors_like(
-          "DSP 20 (USA 149) (Defense Support Program)",
-          "Period_minutes"
-          )
-          ```' | markdown(inline=true) | safe}}
+errs_like = db_engine.errors_like(
+  "DSP 20 (USA 149) (Defense Support Program)",
+  "Period_minutes"
+)
+```' | markdown(inline=true) | safe}}
           <!-- <img src="/img/plover/03-similar.png" /> -->
           <div>
             <table border="1" class="dataframe">
@@ -265,9 +265,9 @@
     <div class="two-thirds">
       <div class="column">
         {{ '```python
-        err = db_engine.detect(new_satellite_record)
-        err[0]
-        ```' | markdown(inline=true) | safe}}
+  err = db_engine.detect(new_satellite_record)
+  err[0]
+```' | markdown(inline=true) | safe}}
         <!-- <img src="/img/plover/04-protect.png" /> -->
         <div>
           <table border="1" class="dataframe">
